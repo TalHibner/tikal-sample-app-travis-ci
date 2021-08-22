@@ -1,0 +1,29 @@
+# travis will have sudo privileges while running the commands mentioned below.
+# That is required because at times, docker requires sudo privileges.
+sudo: required
+
+# I specified docker because the whole operation of building and running is getting done by docker.
+services:
+  - docker
+
+# Before, We are going to run a custom image corresponding to the dockerfile.dev (dockerfile for testing)
+# So, clearly, before running the image, we need to build the image.
+before_install:
+  - docker build -f dockerfile.dev -t talhtikal/helloworld_test .
+
+# This is the script which will run the tests on Travis’s side. Here, I am running the image I built.
+script:
+  - docker run talhtikal/helloworld_test
+
+# This is the beginning of the deploy part under which everything regarding how to automate the deployment.
+deploy:
+  provider: elasticbeanstalk
+  access_key_id: $ACCESS_KEY
+  secret_access_key:
+    secure: $SECRET_ACCESS_KEY
+  region: "us-east-1"
+  app: "helloworld"
+  env: "Helloworld-env"
+  bucket_name: "helloworld-s3-bucket-1234321"
+  on:
+    branch: main
