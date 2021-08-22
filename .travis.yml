@@ -22,7 +22,7 @@ deploy:
   secret_access_key: $SECRET_ACCESS_KEY
   region: "us-east-1"
   app: "helloworld"
-  env: "Helloworld-env"
+  env: "Helloworld-env-1"
   bucket_name: "helloworld-s3-bucket-1234321"
   on:
     branch: main
