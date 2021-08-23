@@ -22,7 +22,7 @@ deploy:
   secret_access_key: $SECRET_ACCESS_KEY
   region: "us-east-1"
   app: "helloworld"
-  env: "Helloworld-env-1"
+  env: "Helloworld-env"
   bucket_name: "helloworld-eb-us-east-1"
   zip_file: "travis-helloworld.zip"
   skip_cleanup: true
