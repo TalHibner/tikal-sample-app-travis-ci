@@ -23,6 +23,8 @@ deploy:
   region: "us-east-1"
   app: "helloworld"
   env: "Helloworld-env-1"
-  bucket_name: "helloworld-s3-bucket-1234321"
+  bucket_name: "helloworld-eb-us-east-1"
+  zip_file: "travis-helloworld.zip"
+  skip_cleanup: true
   on:
     branch: main
