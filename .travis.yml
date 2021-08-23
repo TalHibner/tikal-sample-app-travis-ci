@@ -15,6 +15,10 @@ before_install:
 script:
   - docker run talhtikal/helloworld_test
 
+after_success:
+  - echo "Test Success - Branch($TRAVIS_BRANCH) Pull Request($TRAVIS_PULL_REQUEST) Tag($TRAVIS_TAG)"
+  - echo "Application's Test passed successfuly!"
+
 # This is the beginning of the deploy part under which everything regarding how to automate the deployment.
 deploy:
   provider: elasticbeanstalk
@@ -24,7 +28,5 @@ deploy:
   app: "helloworld"
   env: "Helloworld-env"
   bucket_name: "helloworld-eb-us-east-1"
-  zip_file: "travis-helloworld.zip"
-  skip_cleanup: true
   on:
     branch: main
