@@ -21,8 +21,8 @@ deploy:
   access_key_id: $ACCESS_KEY
   secret_access_key: $SECRET_ACCESS_KEY
   region: "us-east-1"
-  app: "helloworld"
-  env: "Helloworld-env-1"
-  bucket_name: "helloworld-s3-bucket-1234321"
+  app: "hello"
+  env: "Hello-env"
+  bucket_name: "hello-s3-bucket-1234321"
   on:
     branch: main
