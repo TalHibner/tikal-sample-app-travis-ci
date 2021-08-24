@@ -7,12 +7,12 @@ Tools / Online account(s) needed to perform this exercise
 5. Deployment tool - deploy latest code - we'll use Travis-ci for simplicity + AWS Elastic Beanstalk
 6. Cloud provider - AWS
 
-###Objectives
+###Objectives  
 1. Setup a CI flow for a well known tool - any program language, but must have some level
    of unit testing.
 2. Build & Deploy a service as a Docker container.
 
-##First of all! AWS - Infrastructure provisioning
+##First of all! AWS - Infrastructure provisioning  
 - Amazon S3 — Travis CI will transmit our code from github to an S3 bucket for setting up the deployment process.
 - AWS Elastic Beanstalk — It is basically an incredibly easy tool of AWS to deploy applications on the cloud in a matter of seconds without the need of setting up machines manually.  
   Travis is going to be deploying our server side code on it only.  
@@ -21,7 +21,7 @@ Tools / Online account(s) needed to perform this exercise
   ** Now we'll jump to a second repository for this infrastructure provisioning -
   https://github.com/TalHibner/tikal-provisioning
 
-##So, what’s going to be the flow of our CI/CD pipeline  
+##So, what’s going to be the flow of our CI/CD pipeline   
 1). A commit and push happens at GitHub:  
 Here you will find all the code and configuration files:    
 https://github.com/TalHibner/tikal-sample-app-travis-ci  
@@ -50,7 +50,7 @@ We will even get an email alert for ERROR or PASS!
 ** Note: You can run "Restart build" in the right up corner of the failed job if needed.
 
    
-###How I implemented it?
+###How I implemented it?  
 - Created a very basic NodeJS — Hello, World! app the is surprisingly called helloworld. (app.js + package.json)  
 - Wrote a small test for it using mocha and chai frameworks. (tests.js + package.json)  
 - Dockerize the above code - main and dev. (dockerfile/dockerfile.dev)  
@@ -59,10 +59,10 @@ We will even get an email alert for ERROR or PASS!
 - Then, link our project with Travis CI from the website travis-ci.com.
 - Wrote a small travis.yml file which will make sure that on every git push, travis runs the test and if it succeeds, the code gets uploaded on our AWS Elastic Beanstalk hence, making everything sweet and fast.  
 
-Connecting the dots:   
+Connecting the dots:    
 I wrote a travis.yml file for our project to connect all the above steps, making sure that after every subsequent “git push” of new code, Travis CI verifies the code by running the test and correspondingly deploys and updates the code at our AWS Elastic Beanstalk.  
 
-##The application
+##The application  
 This code basically makes GET / route on port number 8000 which when called, produces the following output:
 {
 meta: {
@@ -70,13 +70,13 @@ status: true,
 message: "Michael Scott is the world's best boss!",
 code: 200
 }
-}
+}  
 
-Test:
-make a GET request at the route /, if produces an error, the error is going to be in the variable “err” and if executes successfully, the response will be stored in the variable “output”.
-There comes the two cases:
-   - First one, when an error occurs (“ if (err) ”), we make sure that the code closes with a numerical code(1) specifying that the code exited due to some error (“process.exit(1)”).
-   - The second case, is when no error occurs and response (“res”) gets received and status code 200.
-
-** Don't forget to update the package.json for the relevant dependencies and scripts.
+Test:  
+make a GET request at the route /, if produces an error, the error is going to be in the variable “err” and if executes successfully, the response will be stored in the variable “output”.  
+There comes the two cases:  
+   - First one, when an error occurs (“ if (err) ”), we make sure that the code closes with a numerical code(1) specifying that the code exited due to some error (“process.exit(1)”).  
+   - The second case, is when no error occurs and response (“res”) gets received and status code 200.  
+  
+** Don't forget to update the package.json for the relevant dependencies and scripts.  
 
